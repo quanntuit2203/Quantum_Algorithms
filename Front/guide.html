@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="https://www.uit.edu.vn/sites/vi/files/favicon.ico" type="image/vnd.microsoft.icon">
+        <title>Quantum Circuit Simulator</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="guide.css">
+        <style>
+            .ins {color: #116644; }
+            .comm{color: #FF0000; }
+            .line-numbers{color: #999999;}
+        </style>
+    </head>
+<body>
+    <header>
+        <div class="navbar">
+            <a class ="home" href="/Au.html">About Us</a>
+            <a class ="home" href="/home.html">Home Page</a>
+            <a class ="home" href="https://forms.gle/NZX8P1i1oq1TCBcs6">Feedback</a>
+        </div>
+    </header>
+    <div class = "main">
+        <div class="buttons-container">
+            <button class="button-guide" type="button">
+                <a class ="guide" href= "\home.html">
+                    <i class="fa fa-code" aria-hidden="true"></i> Coding
+                </a>
+            </button>
+                    
+            <button class="button-run" id ="run-btn" type="button">
+                <i class="fa fa-play" aria-hidden="true"></i> Run
+            </button>
+                    
+            <button class="button-reset" id ="reset-btn" type="button">
+                <i class="fa fa-refresh"></i> Reset
+            </button>
+            <!-- <div class="dropdown">
+                <button class="dropbtn">Algorithms</button>
+                <div class="dropdown-content">
+                    <a href="Shor.html">Shor</a>
+                    <a href="#">Option 2</a>
+                    <a href="#">Option 3</a>
+                </div>
+            </div> -->
+        </div>
+        
+        <!-- <bold><h2>Welcome!</h2></bold>
+        <p><strong>Quantum Circuit Simulator</strong> is a website is intended for academic research.</p> 
+        <p>It helps users get acquainted with issues related to quantum programming.</p> -->
+        <hr>
+
+        <h2 style="font-size: 24px; font-weight: 700; color: #333; margin-bottom: 15px;">Examples and Documents</h2>
+            <!-- <p style="font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 10px;">
+                We are excited to introduce <strong>QuantumSimulator</strong> to you. This tool is designed to help you execute the functions of quantum gates from the very first steps of getting familiar with them. 
+                Please read the detailed command descriptions below to see the currently supported commands, and you can use the sample examples we’ve provided to easily get started with our tool.
+            </p> -->
+
+            <div class = "de-content">
+                <div class = "examples">
+                    <center><h3 style="
+                        margin-top: 16px;
+                        margin-bottom: 0px;
+                    ">Examples</h3></center>
+                    <div class = "ex-input">
+                        <p style="
+                        height: 21px;
+                        margin-top: 0px;
+                        margin-bottom: 2px;
+                    ">Input:
+                        <select name="Ex-nums" id="Ex-nums">
+                            <option value="op1">Basic Example</option>
+                            <option value="op2">How "Phase" work</option>
+                            <option value="op3">Working with "Hadamard" and "Chadamard"</option>
+                            <option value="op4">About rotation with "Rotatex"</option>
+                            <option value="op5">About rotation with "Rotatey"</option>
+                        </select>
+                        </p>
+                        <div class="ex-code-editor-container">
+                            <div id="line-numbers" class="line-numbers">
+                                1
+                                <br>
+                                2
+                                <br>
+                                3
+                                <br>
+                                4
+                                <br>
+                                5
+                                <br>
+                                6
+                                <br>
+                                7
+                                <br>
+                                8
+                                <br>
+                                9
+                                <br>
+                                10
+                            </div>
+                            <div id="ex-code-input" ></div>
+                            <!-- <textarea id="ex-code-input" rows="10"readonly></textarea> -->
+                        </div>
+                    </div>
+                    
+                    <div class = "ex-output">
+                        <p>Output here:
+                        <button class="button-run" id ="run-ex-btn2" type="button">
+                                <i class="fa fa-play" aria-hidden="true"></i> Run
+                            </button> 
+                        </p>
+                        <div id="output-ex-display" class="output-display"></div>
+                    </div>
+                </div>
+                <div class="document">
+                    <center><h3>Documents</h3></center>
+                    <table style="width: 100%" >
+                        <tr>
+                            <th style="width:36%">Commands</th>
+                            <th style="width:13%">Example</th>
+                            <th>Explain</th>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">reset</span> <span class="ins"> num_qubits</span></td>
+                            <td><span class="comm">reset</span> <span class="ins"> 2</span></td>
+                            <td>Set up a quantum simulation, with <span class="ins">num_qubits</span> qubits.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">write</span> <span class="ins"> target_qubits</span></td>
+                            <td><span class="comm">write</span> <span class="ins"> 3</span></td>
+                            <td>Write the specified value to the <span class="ins"> target qubits</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">not_gate</span> <span class="ins"> target_qubits</span></td>
+                            <td><span class="comm">not</span> <span class="ins"> 1</span></td>
+                            <td>Perform a logical <strong>NOT</strong> operation on the qubits specified by <span class="ins"> target_qubits</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">cnot_gate</span> <span class="ins"> target_qubits</span>,<span class="ins">condition_qubits</span></td>
+                            <td><span class="comm">cnot</span> <span class="ins"> 3 0</span></td>
+                            <td>Perform a logical <strong>CNOT</strong> operation on the qubits specified by <span class="ins"> target_qubits</span>, using <span class="ins"> condition_qubits</span> as the condition</td>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">hadamard</span><span class="ins"> target_qubits</span></td>
+                            <td><span class="comm">hadamard</span> <span class="ins"> 3</span></td>
+                            <td>Perform a <strong>HADAMARD</strong> operation on the qubits specified by <span class="ins"> target_qubits</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">chadamard</span><span class="ins"> target_qubits</span>,<span class="ins">condition_qubits</span></td>
+                            <td><span class="comm">chadamard</span> <span class="ins"> 4 2</span></td>
+                            <td>Perform a <strong>CHADAMARD</strong> operation on the qubits specified by <span class="ins"> target_qubits</span>, using <span class="ins"> condition_qubits</span> as the condition</td>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">swap</span><span class="ins"> qubit1</span>,<span class="ins">qubit2</span></td>
+                            <td><span class="comm">swap</span> <span class="ins"> 1 0</span></td>
+                            <td>Swap two qubits specified by <span class="ins"> qubit1</span> and <span class="ins"> qubit2</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">phase</span><span class="ins"> theta_degrees</span>,<span class="ins"> target_qubits</span></td>
+                            <td><span class="comm">phase</span> <span class="ins"> 315 1</span></td>
+                            <td>Perform a <strong>Z rotation</strong> (phase), by the specified angle.
+                            <br>
+                            <strong>Important note:</strong> If more than one qubit is specified, this will perform a conditional phase shift, using all specified qubits (like a CZ gate).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">rotatex</span> <span class="ins"> theta_degrees</span>,<span class="ins"> target_qubits</span></td>
+                            <td><span class="comm">rotatex</span> <span class="ins"> 315 0</span></td>
+                            <td>Rotate in <strong>X rotation</strong> </td>
+                        </tr>
+                        <tr>
+                            <td><span class="comm">rotatey</span><span class="ins"> theta_degrees</span>,<span class="ins"> target_qubits</span></td>
+                            <td><span class="comm">rotatey</span> <span class="ins"> 315 3</span></td>
+                            <td>Rotate in <strong>Y rotation</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+    </div>
+        <script src="guide.js"></script>
+</body>
+</html>
