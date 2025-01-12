@@ -131,9 +131,6 @@ body {
     cursor: pointer;
     text-decoration: none;
   }
-
-  
-  /* Style for the dropdown content */
   .dropdown-content {
     display: none;
     position: absolute;
@@ -142,27 +139,19 @@ body {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
-  
-  /* Style for links inside dropdown */
   .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
   }
-  
-  /* Change background color on hover */
   .dropdown-content a:hover {
     background-color: #e3f2fd; 
     color: #1565c0;
 }
-  
-  /* Show the dropdown content on hover */
   .dropdown:hover .dropdown-content {
     display: block;
   }
-  
-  /* Change the color of the button on hover */
   .dropdown:hover .dropbtn {
     background-color: #e3f2fd; 
     color: #1565c0;
@@ -191,19 +180,6 @@ body {
     flex-grow: 1;
     padding: 20px;
 }
-
-/* .buttons-container {
-    margin-bottom: 20px;
-}
-
-.buttons-container button {
-
-    color: #2B46D3; 
-    border: 2px solid #2B46D3;
-    margin-right: 10px;
-    padding: 10px 20px;
-} */
-
 .editor-output-container {
     display: flex;
     flex-grow: 1;
@@ -220,12 +196,9 @@ body {
 .code-editor label, .output label {
     margin-bottom: 10px;
 }
-/* CSS cho việc tô màu cú pháp */
 .CodeMirror .highlighted {
     color: red;
 }
-
-/* CSS cho container chính */
 .code-editor-container {
     border: 3px solid black; /* Viền đậm */
     padding: 10px; /* Khoảng cách giữa nội dung và viền */
@@ -235,7 +208,6 @@ body {
     position: relative; /* Để đảm bảo các phần tử bên trong có thể được định vị tương đối */
 }
 
-/* Đảm bảo CodeMirror chiếm hết chiều cao của container */
 .CodeMirror {
     height: 100%;
     position: absolute;
@@ -243,65 +215,21 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    font-family:  monospace; /* Đặt font chữ */
-    font-size: 16px; /* Đặt kích thước chữ */
+    font-family:  monospace; 
+    font-size: 16px; 
 }
 
-/* Tăng khoảng cách bên trái của văn bản để có nhiều khoảng trống hơn giữa số dòng và văn bản */
 .CodeMirror-gutters {
-    width: 30px; /* Tăng độ rộng của cột số dòng */
-    height: 100%; /* Đảm bảo chiều cao của cột số dòng tăng theo chiều cao của container */
+    width: 30px; 
+    height: 100%; 
 }
-
-/* Điều chỉnh khoảng cách bên trái của văn bản */
 .CodeMirror-linenumber {
-    text-align: center; /* Canh phải số dòng */
+    text-align: center; 
     padding-left: 5px;
     padding-right: 4px;
-    font-family: monospace; /* Đặt font chữ */
-    font-size: 16px; /* Đặt kích thước chữ */
+    font-family: monospace; 
+    font-size: 16px; 
 }
-
-/* Tăng padding bên trái của phần tử CodeMirror để tạo thêm khoảng cách giữa số dòng và văn bản */
-/* .CodeMirror {
-    padding-left: 10px; 
-} */
-
-/* .code-editor-container {
-    padding: 10px; 
-    border-radius: 8px; 
-    display: flex;
-    position: relative;
-    border: 1px solid #ddd;
-    background-color: #f8f8f8;
-    height: 95%; 
-    overflow: hidden;
-} */
-
-/* .line-numbers {
-    background-color: #f8f8f8;
-    border: 3px solid #111111;
-    border-right: 1px solid #ddd;
-    padding: 2px;
-    text-align: center;
-    user-select: none;
-    width: 40px;
-    box-sizing: border-box;
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 10;
-    font-family: monospace;
-    font-size: 14px; 
-    line-height: 1.5em; 
-    font-weight: lighter;
-}
-
-#line-numbers div {
-    height: 1.5em; 
-} */
 
 #code-input {
     font-family: monospace;
@@ -320,7 +248,7 @@ body {
 #fileInput {
     display: none;
 }
-/* Tạo nút tùy chỉnh */
+
 .custom-file-upload {
     padding: 6px 6px;
     background-color: #4CAF50;
@@ -352,17 +280,6 @@ body {
     font-size: 16px;
 }
 
-/* .bloch-sphere-display {
-    background-color: #fff;
-    border: 3px solid #111111;
-    height:400px;
-    margin-top: 50px;
-    overflow: auto;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    white-space: pre-wrap;
-} */
 .download-btn {
     padding: 6px 6px;
     background-color: #4CAF50;
@@ -475,28 +392,6 @@ body {
     opacity: 0.5;  /* Giảm độ sáng của nút */
     pointer-events: none;  /* Vô hiệu hóa các sự kiện click */
 }
-/* .Toastify__spinner {
-    border: 2px solid #f3f3f3; 
-    border-top: 2px solid #f3f3f3; 
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-    animation: spin 2s linear infinite;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.Toastify__progress-bar {
-    height: 5px;
-    background: #f3f3f3;
-    transition: transform 0.3s linear;
-} */
-
 .notification {
     display: none;
     position: fixed;
