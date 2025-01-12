@@ -1,0 +1,546 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+                                                                                /* ĐỊNH DẠNG TRANG CHỦ */
+.navbar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 1.5rem; /* 24px */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg equivalent */
+    justify-content: center;
+    gap: 3rem; /* 48px */
+    font-size: 1.5rem; /* 2xl equivalent */
+    font-weight: bold;
+}
+.home{
+    color: black;
+    text-decoration: none;
+}
+
+.home:hover{
+    color:#1976d2;
+}
+                    /*----------------------------------------------------------------------------------------------------------------*/
+                                                                                    /* GUIDE - RUN - RESET */
+.buttons-container{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem; /* 2 x 0.25rem = 0.5rem, tương đương với gap-2 trong Tailwind CSS */
+}
+/* guide */
+.button-guide {
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    background-color: #ffd600;
+    color: black;
+    font-size: 1rem; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    position: absolute;
+    right: 0;
+
+}
+
+.button-guide:hover {
+    background-color: #e3f2fd; 
+    color: #1565c0; 
+}
+
+/* run */
+.button-run {
+    /* display: inline-flex; */
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    background-color: #4d63db;
+    color: #ecf2f9;
+    font-size: 1rem; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    
+}
+
+.button-run:hover {
+    background-color: #e3f2fd; 
+    color: #1565c0; 
+}
+
+/* reset */
+.button-reset {
+    /* display: inline-flex; */
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    background-color: #f05d56;
+    color: #ecf2f9;
+    font-size: 1rem; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+}
+
+.button-reset:hover i {
+    animation: spin 1s infinite linear;
+}
+
+.button-reset:hover {
+    background-color: #e3f2fd; 
+    color: #1565c0; 
+}
+
+.button-mode, #mode-btn {
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    background-color: #f05d56;
+    color: #ecf2f9;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+}
+
+.button-mode:hover, #mode-btn:hover {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+  .dropbtn {
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem; 
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  
+  /* Style for the dropdown content */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Style for links inside dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change background color on hover */
+  .dropdown-content a:hover {
+    background-color: #e3f2fd; 
+    color: #1565c0;
+}
+  
+  /* Show the dropdown content on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Change the color of the button on hover */
+  .dropdown:hover .dropbtn {
+    background-color: #e3f2fd; 
+    color: #1565c0;
+  }
+/*  */
+.guide {
+    color: black; 
+    text-decoration: none;
+}
+
+.guide:hover {
+    color:#1565c0;
+}
+
+                    /*----------------------------------------------------------------------------------------------------------------*/
+                                                                /* GUIDE - RUN - RESET */
+.container {
+    display: flex;
+    height: calc(100vh - 60px);
+    width: auto;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* .buttons-container {
+    margin-bottom: 20px;
+}
+
+.buttons-container button {
+
+    color: #2B46D3; 
+    border: 2px solid #2B46D3;
+    margin-right: 10px;
+    padding: 10px 20px;
+} */
+
+.editor-output-container {
+    display: flex;
+    flex-grow: 1;
+} 
+
+.code-editor {
+    flex: 1;
+    margin-right: 2%;
+}
+.output {
+    flex: 1;
+}
+
+.code-editor label, .output label {
+    margin-bottom: 10px;
+}
+/* CSS cho việc tô màu cú pháp */
+.CodeMirror .highlighted {
+    color: red;
+}
+
+/* CSS cho container chính */
+.code-editor-container {
+    border: 3px solid black; /* Viền đậm */
+    padding: 10px; /* Khoảng cách giữa nội dung và viền */
+    border-radius: 8px; /* Độ cong của các góc viền */
+    height: 377px; /* Chiều cao của container, điều chỉnh theo nhu cầu */
+    overflow: hidden; /* Đảm bảo không có scrollbars bên ngoài container */
+    position: relative; /* Để đảm bảo các phần tử bên trong có thể được định vị tương đối */
+}
+
+/* Đảm bảo CodeMirror chiếm hết chiều cao của container */
+.CodeMirror {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-family:  monospace; /* Đặt font chữ */
+    font-size: 16px; /* Đặt kích thước chữ */
+}
+
+/* Tăng khoảng cách bên trái của văn bản để có nhiều khoảng trống hơn giữa số dòng và văn bản */
+.CodeMirror-gutters {
+    width: 30px; /* Tăng độ rộng của cột số dòng */
+    height: 100%; /* Đảm bảo chiều cao của cột số dòng tăng theo chiều cao của container */
+}
+
+/* Điều chỉnh khoảng cách bên trái của văn bản */
+.CodeMirror-linenumber {
+    text-align: center; /* Canh phải số dòng */
+    padding-left: 5px;
+    padding-right: 4px;
+    font-family: monospace; /* Đặt font chữ */
+    font-size: 16px; /* Đặt kích thước chữ */
+}
+
+/* Tăng padding bên trái của phần tử CodeMirror để tạo thêm khoảng cách giữa số dòng và văn bản */
+/* .CodeMirror {
+    padding-left: 10px; 
+} */
+
+/* .code-editor-container {
+    padding: 10px; 
+    border-radius: 8px; 
+    display: flex;
+    position: relative;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    height: 95%; 
+    overflow: hidden;
+} */
+
+/* .line-numbers {
+    background-color: #f8f8f8;
+    border: 3px solid #111111;
+    border-right: 1px solid #ddd;
+    padding: 2px;
+    text-align: center;
+    user-select: none;
+    width: 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    font-family: monospace;
+    font-size: 14px; 
+    line-height: 1.5em; 
+    font-weight: lighter;
+}
+
+#line-numbers div {
+    height: 1.5em; 
+} */
+
+#code-input {
+    font-family: monospace;
+    font-size: 14px; 
+    width: 100% ;
+    height: 100%;
+    padding-left: 40px; 
+    box-sizing: border-box;
+    resize: none;
+    overflow: auto ;
+    line-height: 1.5em; 
+    border: 3px solid #111111;
+    outline: none;
+    margin: 0;
+}
+#fileInput {
+    display: none;
+}
+/* Tạo nút tùy chỉnh */
+.custom-file-upload {
+    padding: 6px 6px;
+    background-color: #4CAF50;
+    color: #ecf2f9;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+}
+
+.custom-file-upload:hover {
+    background-color: white;
+    color: #4CAF50;
+}
+.output-display {
+    border: 3px solid #111111;
+    height: 404px;
+    margin-bottom: 50px;
+    overflow: auto;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+/* .bloch-sphere-display {
+    background-color: #fff;
+    border: 3px solid #111111;
+    height:400px;
+    margin-top: 50px;
+    overflow: auto;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+} */
+.download-btn {
+    padding: 6px 6px;
+    background-color: #4CAF50;
+    color: #ecf2f9;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem; 
+    text-decoration: none;
+}
+
+.download-btn:hover {
+    background-color: white;
+    color: #4CAF50;
+}
+.box_container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 58px;
+}
+.box {
+    width: 253px;
+    height: 253px;
+    background-color: white;
+    border: 2px solid #111111;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.box-image {
+    width: 100%; /* Chiều rộng hình ảnh */
+    height: 100%; /* Chiều cao hình ảnh */
+    object-fit: cover; /* Cắt và làm đầy hình ảnh */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Hiệu ứng chuyển tiếp khi phóng to hình ảnh */
+}
+
+/* .box:hover .box-image {
+    
+    
+} */
+.box-image-4 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Hiệu ứng chuyển tiếp khi thay đổi độ mờ */
+}
+
+.box:hover .box-image-4 {
+    opacity: 1; /* Hiển thị hình B khi di chuột vào */
+    transform: scale(1.4); /* Phóng to hình ảnh khi di chuột vào */
+    object-fit: contain;
+    z-index: 10;
+    position: absolute; /* Đảm bảo hình ảnh không bị giới hạn trong box */
+    
+}
+.box:hover .box-image {
+    opacity: 0; /* Ẩn hình A khi di chuột vào */
+}
+.box::after {
+    content: attr(data-info);
+    display: none;
+    position: absolute;
+    bottom: -40px; /* Adjust position to fit below the box */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    font-size: 14px;
+    z-index: 1;
+}
+
+.box:hover::after {
+    display: block;
+}
+.button-step {
+    /* display: inline-flex; */
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    background-color: #4d63db;
+    color: #ecf2f9;
+    font-size: 1rem; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+}
+
+.button-step:hover {
+    background-color: #e3f2fd; 
+    color: #1565c0; 
+}
+.disabled-button {
+    opacity: 0.5;  /* Giảm độ sáng của nút */
+    pointer-events: none;  /* Vô hiệu hóa các sự kiện click */
+}
+/* .Toastify__spinner {
+    border: 2px solid #f3f3f3; 
+    border-top: 2px solid #f3f3f3; 
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    animation: spin 2s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.Toastify__progress-bar {
+    height: 5px;
+    background: #f3f3f3;
+    transition: transform 0.3s linear;
+} */
+
+.notification {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.notification-icon {
+    margin-right: 10px;
+}
+
+.notification-message {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.notification-close {
+    cursor: pointer;
+    font-size: 16px;
+    color: #aaa;
+}
+
+.notification-progress {
+    height: 4px;
+    background-color: #00c853;
+    animation: progress 3s linear forwards;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+@keyframes progress {
+    from { width: 100%; }
+    to { width: 0%; }
+}

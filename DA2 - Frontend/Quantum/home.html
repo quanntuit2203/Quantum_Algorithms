@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://www.uit.edu.vn/sites/vi/files/favicon.ico" type="image/vnd.microsoft.icon">
+    <title>Quantum Circuit Simulator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+        .highlighted-line-number {
+            background-color: yellow; /* Màu nền khi số dòng được làm nổi bật */
+            color: black; /* Màu chữ khi số dòng được làm nổi bật */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a class ="home" href="/Au.html">About Us</a>
+            <a class ="home" href="/home.html">Home Page</a>
+            <a class ="home" href="https://forms.gle/NZX8P1i1oq1TCBcs6">Feedback</a>
+        </div>
+        
+    </header>
+
+    <div class="container">
+        <div id="notification" class="notification">
+            <div class="notification-content">
+                <div class="notification-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="#00c853">
+                        <path d="M12 0a12 12 0 1012 12A12.014 12.014 0 0012 0zm6.927 8.2l-6.845 9.289a1.011 1.011 0 01-1.43.188l-4.888-3.908a1 1 0 111.25-1.562l4.076 3.261 6.227-8.451a1 1 0 111.61 1.183z"></path>
+                    </svg>
+                </div>
+                <div class="notification-message">Khởi động thành công</div>
+                <div class="notification-close" onclick="closeNotification()">&#10006;</div>
+            </div>
+            <div class="notification-progress"></div>
+        </div>
+        <div class="main">
+            <div class="buttons-container" style="position: relative;">
+                <button class="button-guide" type="button">
+                    <a class ="guide" href= "\guide.html">
+                        <i class="fa fa-book" aria-hidden="true"></i> Guide
+                    </a>
+                </button>
+                
+                <button class="button-run" id ="run-btn" type="button">
+                    <i class="fa fa-play" aria-hidden="true"></i> Run
+                </button>
+                
+                <button class ="button-step" id="sbs-btn" type="button">
+                    <i class="fa fa-step-forward" aria-hidden="true"></i> Step
+                </button>
+                
+                <button class="button-reset" id ="reset-btn" type="button">
+                    <i class="fa fa-refresh"></i> Reset
+                </button>
+
+                <div class="dropdown">
+                    <button class="button-mode" id="mode-btn" type="button">
+                        Quantum
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="RiscV.html">RISC-V</a>
+                        <a href="Mixed.html">Mixed (Quantum + RISC-V)</a>
+                        <!-- Thêm các chế độ khác tại đây -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-output-container">
+                <div class="code-editor">
+                    <p style="margin-top: 18px; margin-bottom: 1px;">Enter your code here or 
+                        <span><label for="fileInput" class="custom-file-upload">Choose File</label>
+                        <input type="file" id="fileInput" accept=".txt"/></span>
+                    </p>
+                    <!-- Nút tải file tùy chỉnh -->
+                    <div class="code-editor-container" style="top: 15px;">
+                        <textarea id="code-input" rows="10"></textarea>
+                        <!-- <div id="line-numbers" class="line-numbers"></div> -->
+                        <!-- <textarea id="code-input" rows="10" oninput="updateLineNumbers()" onscroll="syncScroll()"></textarea> -->
+                    </div>
+                    <!-- <div class="dropdown">
+                    <button class="dropbtn">Algorithms</button>
+                    <div class="dropdown-content">
+                      <a href="Shor.html">Shor</a>
+                      <a href="#">Option 2</a>
+                      <a href="#">Option 3</a>
+                    </div>
+                  </div> -->
+                </div>
+                <div class="output">
+                    <p style="margin-top: 8px; margin-bottom: 11px;">Output below & 
+                        <button id="download-btn" class="download-btn">Download here</button>
+                    </p>
+                    <div id="output-display" class="output-display" style="
+                    margin-right: 0"></div>
+                    <!-- <div class = "box_container">
+                        <div class="box" data-info="Shor's Algorithm">
+                            <img src="shors-circuit.png" alt="Image 1" class="box-image" >
+                            <img src="Shor's_algorithm.png" alt="Image 4" class="box-image-4" >
+                        </div>
+                        <div class="box" data-info="Grover's Algorithm">
+                            <img src="lov.png" alt="Image 2" class="box-image" >
+                            <img src="grover.png" alt="Image 4" class="box-image-4" >
+                        </div>
+                        <div class="box" data-info="Deutsch-Jozsa Algorithm">
+                            <img src="dj.png" alt="Image 4" class="box-image" >
+                            <img src="Josza.png" alt="Image 3" class="box-image-4" >
+                        </div>
+                    </div> -->
+                
+            </div>
+        </div>
+    </div>
+    <script src="home.js"></script>
+    
+</body>
+</html>
+
