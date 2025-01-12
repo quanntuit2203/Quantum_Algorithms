@@ -543,32 +543,6 @@ class ISS:
             self.add_bin(reg_list[rd_tamp], "1")
         return result
     ##################### xong các hàm của I format ###############
-    # def lw(self, imm, rs, rd):
-    #     try:
-    #         imm_dec = self.positive(imm)
-    #         rs_index = dict_reg[rs]
-    #         rs_value = reg_list[rs_index]
-    #         rs_value_dec = self.positive(rs_value)
-
-    #         address_mem = int((imm_dec + rs_value_dec) / 4)
-    #         if address_mem < 0 or address_mem >= len(mem_list):
-    #             raise IndexError(f"Địa chỉ bộ nhớ {address_mem} không hợp lệ.")
-            
-    #         # Log trạng thái trước khi đọc
-    #         print(f"Trước LW: imm={imm}, rs_value={rs_value_dec}, address_mem={address_mem}, mem_list[address_mem]={mem_list[address_mem]}")
-
-    #         self.mem_read(address_mem)
-    #         result = mem_list[address_mem]
-
-    #         rd_index = dict_reg[rd]
-    #         reg_list[rd_index] = result
-
-    #         print(f"Sau LW: Lưu vào rd={rd}, giá trị={result}")
-    #         return result
-    #     except Exception as e:
-    #         print(f"Lỗi trong lệnh LW: {e}")
-    #         raise
-
     def lw(self, imm,rs,rd):
         imm                 = self.positive(imm)
         self.take_imm(imm)
@@ -1691,12 +1665,7 @@ def process_assembly():
                 fileA_lines.append('')
 
             label_address += 4
-            # elif line:  # Nếu là lệnh
-            #     fileA_lines.append(line)
-            #     fileA_lines.append('')  # Thêm 2 dòng trống
-            #     fileA_lines.append('')
-            #     fileA_lines.append('')
-            # label_address += 4
+            
         # Lưu fileA
         fileA_path = os.path.join(os.getcwd(), 'fileA.txt')
         with open(fileA_path, 'w') as f:
@@ -1790,90 +1759,6 @@ def process_assembly():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# def process_assembly():
-#     data = request.get_json()
-#     code = data.get('code', '')
-
-#     if not code:
-#         return jsonify({"error": "No assembly code provided"}), 400
-
-#     # Simulate processing a single file
-#     try:
-#         # Prepare input lines from the provided code
-#         code_lines = code.split('\n')
-#         dic_label = {}  # Placeholder for label dictionary
-#         label_address = 0
-#         for line in (code_lines):
-#             line = line.strip()
-#             if line.endswith(':'):
-#                 label = line[:-1]
-#                 dic_label[label] = label_address  # Address simulation 
-#             else:
-#                 if line:
-#                     label_address += 4
-#         # Process assembly instructions
-#         output = []
-#         current_address = 0
-#          # Preprocess labels
-#         for line in code_lines:
-#             line = line.strip()
-#             if not line or line.endswith(':'):
-#                 continue
-            
-#             parts = line.replace(',', '').split()
-#             opcode = parts[0]
-            
-#             if opcode not in dic_format:
-#                 output.append(f"Error: Unknown instruction {opcode}")
-#                 continue
-#             # if dic_format[opcode] == 'UJ-type' and opcode == 'jal':
-#             #     a = rv.UJ_type(parts, dic_label, current_address)
-                   
-#             case_type = dic_format[opcode]
-#             try:
-#                 if case_type == 'R-type':
-#                     result = rv.R_type(parts)
-#                 elif case_type == 'I-type':
-#                     if '(' in parts[2] and ')' in parts[2]: 
-#                         offset, register = parts[2].split('(')
-#                         register = register.strip(')')
-#                         parts[2] = offset
-#                         parts.insert(3, register)
-#                     result = rv.I_type(parts)
-#                 elif case_type == 'S-type':
-#                     if '(' in parts[2] and ')' in parts[2]:
-#                         offset, register = parts[2].split('(')
-#                         register = register.strip(')')
-#                         parts[2] = offset
-#                         parts.insert(3, register)
-#                     result = rv.S_type(parts)
-#                 elif case_type == 'SB-type':
-#                     result = rv.SB_type(parts, dic_label, current_address)
-#                 elif case_type == 'U-type':
-#                     result = rv.U_type(parts)
-#                 elif case_type == 'UJ-type':
-#                     result = rv.UJ_type(parts, dic_label, current_address)
-#                 else:
-#                     result = f"Error: Unsupported format {case_type}"
-#                 if result:
-#                     output.append(result)
-#                 else:
-#                     output.append(f"Error: Failed to process {line}")
-#                 current_address = current_address + 4  
-#             except Exception as e:
-#                 output.append(f"Error: {str(e)} while processing {line}")
-                
-#         # Write output to a simulated file (binary_out.txt)
-#         binary_out_path = os.path.join(os.getcwd(), 'binary_out.txt')
-#         with open(binary_out_path, 'w') as f:
-#             f.write('\n'.join(output))
-#         return jsonify({"output": output, "file": "binary_out.txt"})
-
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
-
-       
- 
 @app.route('/process_iss', methods=['POST'])
 def process_iss():
     try:
@@ -1882,33 +1767,7 @@ def process_iss():
         reg_list = ["0" * 32] * 32
         pc_array = [0] * 3000
         mem_list = ["0" * 32] * 262143
-        # Kiểm tra yêu cầu reset
-        # reset = request.json.get('reset', False)
-        # if reset:
-        #     # Reset tất cả trạng thái
-        #     reg_list = ["0" * 32] * 32
-        #     pc_array = [0] * 3000
-        #     mem_list = ["0" * 32] * 262143
-            
-        #     # Reset trạng thái hiện tại
-        #     current_state = {
-        #         "current_line": 0,
-        #         "start_line": 0,
-        #         "number_command": 0,
-        #         "branch_jump_loop": 0,
-        #         "branch_loop": False,
-        #         "branch_forward": 0,
-        #         "branch_back": 0,
-        #         "jump_over": 0,
-        #         "jump_back": 0,
-        #         "is_completed": False,
-        #         "file_content": [],
-        #         "sum_line": 0
-        #     }
-            
-        #     # Phản hồi sau khi reset
-        #     return jsonify({"status": "Reset thành công"}), 200
-        # # Lấy tham số mode từ request JSON
+        
         # Đường dẫn fileC.txt
         fileC_path = os.path.join(os.getcwd(), 'fileC.txt')
         if not os.path.exists(fileC_path):
@@ -2084,29 +1943,7 @@ def step_iss():
         }), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-# @app.route('/get_reg_output', methods=['GET'])
-# def get_reg_output():
-#     register_out_path = os.path.join(os.getcwd(), 'reg_out.txt')
-#     try:
-#         with open(register_out_path, 'r') as f:
-#             content = f.read()
-#         return jsonify({"output": content.splitlines()})
-#     except FileNotFoundError:
-#         return jsonify({"error": "Output file not found."}), 404
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
-    
-# @app.route('/get_mem_output', methods=['GET'])
-# def get_mem_output():
-#     mem_out_path = os.path.join(os.getcwd(), 'mem_out.txt')
-#     try:
-#         with open(mem_out_path, 'r') as f:
-#             content = f.read()
-#         return jsonify({"output": content.splitlines()})
-#     except FileNotFoundError:
-#         return jsonify({"error": "Output file not found."}), 404
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
 
