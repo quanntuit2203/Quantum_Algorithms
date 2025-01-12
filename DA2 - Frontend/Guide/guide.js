@@ -1,36 +1,3 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//   const selector = document.getElementById('Ex-nums');
-//   const contentDispla = document.getElementById('ex-code-input');
-//   // Danh sách các từ cần tô đậm
-//   //const wordList = ["reset", "write", "not", "cnot", "phase", "hadamard", "chadamard", "rotatex", "rotatey"];
-//   // Danh sách các số cần tô đậm
-//   //const numList = ["0", "1", "2", "3", "4", "5", "8", "13", "14", "135", "180", "225", "360"];
-//   selector.addEventListener('change', () => {
-//     const selectedOptio = selector.value;
-//     switch (selectedOptio) {
-//         case 'op1':
-//           contentDispla.textContent = `reset 2\nwrite 1\nnot 0\nmeasure `;
-//           break;
-//         case 'op2':
-//           contentDispla.textContent = `reset 2\nwrite 3\nphase 360 1\ncnot 1 0\nwrite 1\nmeasure`;
-//           break;
-//         case 'op3':
-//           contentDispla.textContent = `reset 5\nwrite 14\nhadamard 0\ncnot 3 0\ncnot 4 0\nchadamard 4 1\nchadamard 4 1\nreset 4\nmeasure`;
-//           break;
-//         case 'op4':
-//           contentDispla.textContent = `reset 4\nwrite 8\nrotatex 225 1\nwrite 4\nrotatex 180 3\nwrite 13\nphase 135 2\nmeasure`;
-//           break;
-//         case 'op5':
-//           contentDispla.textContent = `reset 2\nwrite 0\ncnot 1 0\nrotatey 360 0\nmeasure`;
-//           break;
-//         default:
-//           contentDispla.textContent = '';
-//     }
-//         });
-// // Trigger the change event on page load to display the content for the first option
-// selector.dispatchEvent(new Event('change'));
-// });
-
 document.addEventListener('DOMContentLoaded', () => {
   const selector = document.getElementById('Ex-nums');
   const contentDisplay = document.getElementById('output-ex-display');
@@ -75,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Trigger the change event on page load to display the content for the first option
 selector.dispatchEvent(new Event('change'));
 });
 document.addEventListener('DOMContentLoaded', () => {
@@ -111,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
               contentText = '';
       }
 
-      // Thay thế ký tự xuống dòng bằng thẻ <br>
       const formattedContent = contentText.split('\n').map(line => {
           return line.split(/\s+/).map(word => {
               if (wordList.includes(word)) {
@@ -175,6 +140,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Trigger the change event on page load to display the content for the first option
 selector.dispatchEvent(new Event('change'));
 });
