@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const fileInput = document.getElementById('fileInput');
     const modeButton = document.getElementById('mode-btn');
     const tabs = document.querySelectorAll('.tab-link');
-    // Khởi tạo CodeMirror
+
     const editor = CodeMirror.fromTextArea(codeInput, {
         lineNumbers: true,
         mode: "javascript"
@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let stepCount = parseInt(localStorage.getItem('stepCount')) || 0;
     const registersPerStep = 32;
 
-    // Kiểm tra và tải dữ liệu từ localStorage cho RISC-V
     if (localStorage.getItem('savedCodeMixed')) {
         editor.setValue(localStorage.getItem('savedCodeMixed'));
     }
@@ -162,8 +161,6 @@ function highlightKeywords(editor) {
     
 
     let currentMode = 'Mixed (Quantum & RISC-V)';
-
-    // Gán sự kiện click cho nút chuyển đổi chế độ
     modeButton.addEventListener('click', () => {
         if (currentMode === 'Mixed (Quantum & RISC-V)') {
             // Lưu dữ liệu RISC-V trước khi chuyển sang Quantum
@@ -174,10 +171,7 @@ function highlightKeywords(editor) {
         }
         modeButton.textContent = currentMode;
     });
-
     
-    
-    // Gán sự kiện tải file và hiển thị nội dung trong CodeMirror
     fileInput.addEventListener('change', function(event) {
         const file = event.target.files[0]; // Lấy tệp đầu tiên
         if (file) {
@@ -190,13 +184,11 @@ function highlightKeywords(editor) {
         }
     });
 
-    // Sự kiện khi người dùng nhấn nút Download
     downloadButton.addEventListener('click', function() {
         const outputContent = outputDisplay.textContent;  // Lấy nội dung từ outputDisplay
         downloadFile('output_result.txt', outputContent);  // Gọi hàm để tải file xuống
     });
 
-    // Hàm kiểm tra loại code trong input
     function determineHighlightMode(code) {
         const quantumKeywords = ['reset', 'write', 'not', 'cnot', 'hadamard', 'chadamard', 'swap', 'phase', 'rotatex', 'rotatey', 'measure'];
         const riscvKeywords = ["srl", "sra", "slt", "sll", "sltu", "xor", "add", "sub", "or", "and", "addi", 
@@ -225,7 +217,7 @@ function highlightKeywords(editor) {
         if (containsRiscV) return 'riscv';
         return 'none';
     }
-    // Hàm tạo file TXT từ nội dung và tải xuống
+    
     function downloadFile(filename, content) {
         const blob = new Blob([content], { type: 'text/plain' });
         const link = document.createElement('a');
@@ -237,19 +229,14 @@ function highlightKeywords(editor) {
     function highlightLineNumber(lineNumber, mode) {
         const lineNumbers = document.querySelectorAll('.CodeMirror-linenumber');
     
-        // Loại bỏ tất cả highlight hiện tại
         lineNumbers.forEach((line) => {
             line.classList.remove('highlighted-line-number');
         });
     
         let adjustedLineNumber = lineNumber;
-    
-        // Nếu chế độ là 'mixed', điều chỉnh lineNumber
         if (mode === 'mixed') {
             adjustedLineNumber = lineNumber + 1;
         }
-    
-        // Thêm highlight vào dòng chỉ định
         if (adjustedLineNumber >= 0 && adjustedLineNumber < lineNumbers.length) {
             lineNumbers[adjustedLineNumber].classList.add('highlighted-line-number');
         }
@@ -260,19 +247,16 @@ function highlightKeywords(editor) {
         line.classList.remove('highlighted-line-number');
     });
 
-    // Reset lại trạng thái của dòng hiện tại
     currentLine = 0;
     previousHighlightedLine = null;
     }
+    
     runButton.addEventListener('click', async () => {
             const code = editor.getValue();
             localStorage.removeItem('savedQuantumOutput');
             if (!code.trim()) {
                 const errorMessage = "Chưa có input nên không thể chạy chương trình";
                 outputDisplay.textContent = errorMessage;
-                // localStorage.setItem('savedQuantumOutput', errorMessage);
-                // localStorage.setItem('savedRegisterOutput', errorMessage);
-                // localStorage.setItem('savedMemoryOutput', errorMessage);
                 return;
             }
             try {
@@ -333,7 +317,8 @@ function highlightKeywords(editor) {
     });
     let previousStep = 0;
     let usePreviousStep = false;
-    // Gán sự kiện click cho nút step
+    //Step
+    
     stepButton.addEventListener('click', async () => {
         const code = editor.getValue();
         totalLines = editor.lineCount();
@@ -383,7 +368,7 @@ function highlightKeywords(editor) {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({})  // Truyền mode dưới dạng JSON
+                        body: JSON.stringify({})
                     });
 
                     if (!issResponse.ok) {
@@ -392,16 +377,16 @@ function highlightKeywords(editor) {
                     const issResult = await issResponse.json();
                     const storeLog = issResult.store;
                     let lockEx = false;
-                    // Kiểm tra nếu dòng hiện tại có 'bge' và ký tự thứ 3 không phải là số
+
                     if (lineContent.startsWith('bge')) {
                         const parts = lineContent.split(',');
-                        const targetLabel = parts[2].trim();  // Lấy nhãn 'loop'
+                        const targetLabel = parts[2].trim();
                         lockEx = true;
                         // Tìm kiếm dòng chứa nhãn và kết thúc bằng ":"
                         for (let i = currentLine - 1; i >= 0; i--) {
                             const prevLine = editor.getLine(i).trim();
                             if (prevLine.startsWith(targetLabel) && prevLine.endsWith(':')) {
-                                currentLine = i;  // Đặt dòng tiếp theo sau nhãn để highlight
+                                currentLine = i;
                                 break;
                             }
                         }
@@ -415,32 +400,32 @@ function highlightKeywords(editor) {
                                 const match = logLines[i].match(/done 31 - (\d+)/);
                                 if (match) {
                                     let logStep = parseInt(match[1], 10);
-                                    // Nếu dòng kết thúc bằng ":", kích hoạt chế độ giữ stepCount - 1
+                                    
                                     if (lineContent.endsWith(':')) {
-                                        usePreviousStep = true;  // Bật chế độ giữ stepCount - 1
+                                        usePreviousStep = true;  
                                         previousStep = stepCount - 1;
                                         if (logStep === previousStep) {
                                             capture = true; 
                                         }  
-                                        // Dừng thu thập khi logStep = previousStep - 1
+                                
                                         if (logStep === previousStep - 1) {
                                             capture = false;
                                         }
                                     }   else {
-                                        // Nếu đã qua nhãn, giữ stepCount - 1
+                                  
                                         if (usePreviousStep) {
                                             if (logStep === previousStep+1) {
                                                 capture = true;
-                                                previousStep++;  // Tiếp tục tăng dần log sau nhãn
+                                                previousStep++;  
                                             }
                                             if (logStep === previousStep-1) {
                                                 capture = false;
                                             }
                                         } else {
-                                            // Logic ban đầu (done 31 - stepCount)
+                                       
                                             if (logStep === stepCount) {
                                                 capture = true;
-                                                //break;  // Dừng vòng lặp khi tìm thấy log
+             
                                             }
                                             if (logStep === stepCount - 1) {
                                                 capture = false;
@@ -454,21 +439,16 @@ function highlightKeywords(editor) {
                                 filteredLog.unshift(logLines[i]);
                             }
                         }
-                        //outputDisplay.textContent = '';
-                        // Kiểm tra nếu không có thông tin phù hợp
+                       
                         if (filteredLog.length === 0) {
                             outputDisplay.textContent = "Kết thúc. Không có dữ liệu phù hợp.";
                             stepButton.disabled = true;
                         } 
-                        // else {
-                        //     outputDisplay.textContent = `Step Count: ${stepCount}\n` +filteredLog.join('\n'); //`Step Count: ${stepCount}\n` + 
-                        // }
-
             }
         } 
             if (currentLine >= totalLines - 1) {
                 stepButton.disabled = true;
-                currentLine = 0;  // Reset về đầu nếu đã đến dòng cuối
+                currentLine = 0;  
             } else {  
                 currentLine++;
             }
@@ -493,8 +473,6 @@ function highlightKeywords(editor) {
 document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelectorAll('.tab-link');
     const outputDisplay = document.getElementById('output-display');
-
-    // Hàm hiển thị nội dung từ localStorage dựa vào tab đang chọn
     const showContentFromStorage = (apiEndpoint) => {
         if (apiEndpoint === '/get_reg_output') {
             const regOutput = localStorage.getItem('savedRegisterOutput');
@@ -507,7 +485,6 @@ document.addEventListener('DOMContentLoaded', () => {
             outputDisplay.textContent = quantumOutput || "Chưa có dữ liệu. Hãy nhấn Run.";
         }
     };
-    // Xử lý sự kiện nhấn vào các tab
     tabs.forEach(tab => {
         tab.addEventListener('click', (event) => {
             // Bỏ class 'active' khỏi tất cả các tab
@@ -519,7 +496,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showContentFromStorage(apiEndpoint);
         });
     });
-    // Hiển thị nội dung mặc định khi trang tải lần đầu
     const defaultTab = document.querySelector('.tab-link.active');
     if (defaultTab) {
         const defaultEndpoint = defaultTab.getAttribute('data-endpoint');
